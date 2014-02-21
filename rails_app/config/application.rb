@@ -43,7 +43,8 @@ module RailsApp
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
 
-    config.middleware.insert_before ActionDispatch::ShowExceptions, Rack::LobsterAsMiddleware
+    config.middleware.insert_after ActionDispatch::DebugExceptions, Rack::LobsterAsMiddleware
+    #config.middleware.insert_after ActionDispatch::Static, Rack::LobsterAsMiddleware
 
     # Use SQL instead of Active Record's schema dumper when creating the database.
     # This is necessary if your schema can't be completely dumped by the schema dumper,

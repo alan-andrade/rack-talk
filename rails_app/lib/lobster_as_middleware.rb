@@ -1,5 +1,6 @@
 require 'rack'
 require 'rack/lobster'
+require 'faraday'
 require 'pry'
 
 module Rack
@@ -12,8 +13,11 @@ module Rack
     def call env
       req = Request.new env
 
-      if req.path =~ /lobster/
-        @lobster.call env
+      #raise 'failllll!'
+      if req.path =~ /google/
+        response = Faraday.get 'http://google.com'
+        [200, {}, [response.body]]
+        #@lobster.call env
       else
         @app.call env
       end
